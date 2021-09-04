@@ -11,12 +11,14 @@ class OrionSearchQueryBuilder {
 
   void withKeyword(String keyword) => this.keyword = keyword;
 
-  String build() => jsonEncode({
+  String build() => jsonEncode(toJson());
+
+  Map<String, dynamic> toJson() => {
         if (filters.isNotEmpty) "filters": filters,
         if (scopes.isNotEmpty) "scopes": scopes,
         if (keyword != null) "search": {"value": keyword},
         if (sortFields.isNotEmpty) "sort": sortFields,
-      });
+      };
 
   void addFilter(
     String fieldName,
